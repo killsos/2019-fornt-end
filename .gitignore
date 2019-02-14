@@ -1,0 +1,8 @@
+read.txt
+node_modules
+typings
+.babelrc
+.vscode
+package-lock.json
+package.json
+yarn.lock

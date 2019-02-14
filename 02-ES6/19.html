@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+  // 箭头函数
+  // 没有this 需要向上一个作用域 找this
+
+let o = {
+    age: 12,
+    fn() {
+      setTimeout(function() {
+        console.log(this);
+      }, 0)
+    }
+}
+//o.fn(); // 浏览器中运行 this 执行 window
+
+/**
+ * setTimeout 是 属于 window对象
+ * window.setTimeout
+ * 所以 this 执向了 window
+ */
+
+let o1 = {
+    age: 12,
+    fn() {
+      setTimeout(function() {
+        console.log(this);
+      }.bind(this), 0)
+    }
+}
+//o1.fn(); // bind this 使 this 指向了对象o1
+
+
+let o2 = {
+    age: 13,
+    fn(){
+      setTimeout(() => {
+        console.log(this);
+      }, 0)
+    }
+}
+
+//o2.fn(); // 箭头函数
+
+let f12 = o2.fn;
+
+//f12();
+
+
+let o3 = {
+    age: 13,
+    fn(){
+       return () => {
+         console.log(this);
+       }
+    }
+}
+o3.fn()();
+
+let f21 = o3.fn;
+
+f21()();
+
+
+  </script>
+</head>
+<body>
+</body>
+</html>
